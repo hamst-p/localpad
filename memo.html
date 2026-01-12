@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Localpad v1.2</title>
+    <title>Localpad v1.21</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&family=Outfit:wght@200;300;400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap');
         
@@ -156,23 +156,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-        
-        .subtitles {
-            margin-top: 21px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        
-        .subtitle {
-            font-family: 'Fira Code', monospace;
-            color: var(--text-muted);
-            font-size: 0.809rem; /* 13px / 16px */
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            text-transform: lowercase;
-            line-height: 1.618;
         }
         
         /* Glass Card */
@@ -433,15 +416,6 @@
             line-height: 1.4;
         }
         
-        .memo-date {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            white-space: nowrap;
-            padding: 4px 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
-        }
-        
         .memo-content {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -456,10 +430,23 @@
         
         .memo-actions {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 8px;
             margin-top: 18px;
             padding-top: 16px;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .memo-actions-left {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .memo-timestamp {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
         }
         
         .btn-icon {
@@ -649,6 +636,7 @@
         
         /* Empty State */
         .empty-state {
+            grid-column: 1 / -1;
             text-align: center;
             padding: 80px 40px;
             animation: fadeIn 0.6s ease-out;
@@ -691,7 +679,6 @@
             gap: 6px;
             font-size: 0.75rem;
             color: var(--text-muted);
-            margin-left: auto;
         }
         
         kbd {
@@ -703,6 +690,82 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 6px;
             color: var(--text-secondary);
+        }
+        
+        /* Info Popup */
+        .info-popup {
+            position: fixed;
+            top: 21px;
+            right: 21px;
+            max-width: 340px;
+            padding: 21px 24px;
+            background: rgba(20, 20, 30, 0.85);
+            backdrop-filter: blur(21px);
+            -webkit-backdrop-filter: blur(21px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            z-index: 100;
+            animation: popupIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .info-popup.hidden {
+            display: none;
+        }
+        
+        @keyframes popupIn {
+            from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .info-popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .info-popup-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+        
+        .info-popup-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-right: 16px;
+        }
+        
+        .info-popup-content p {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 640px) {
+            .info-popup {
+                top: 13px;
+                right: 13px;
+                left: 13px;
+                max-width: none;
+                padding: 16px 18px;
+            }
+            
+            .info-popup-content p {
+                font-size: 0.7rem;
+            }
         }
         
         /* Toast Notification */
@@ -763,14 +826,6 @@
                 font-size: 1.3rem;
             }
             
-            .subtitles {
-                margin-top: 13px;
-            }
-            
-            .subtitle {
-                font-size: 0.75rem;
-            }
-            
             .input-row {
                 grid-template-columns: 1fr;
             }
@@ -829,6 +884,38 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+        
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            z-index: 50;
+            pointer-events: none;
+        }
+        
+        .footer a {
+            pointer-events: auto;
+        }
+        
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--accent-primary);
+        }
+        
+        .footer .heart {
+            color: #ef4444;
+        }
     </style>
 </head>
 <body>
@@ -838,16 +925,20 @@
     <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
     
+    <!-- Info Popup -->
+    <div class="info-popup" id="info-popup">
+        <button class="info-popup-close" onclick="closeInfoPopup()" title="Close">✕</button>
+        <div class="info-popup-content">
+            <p>no server, no database, no tracking, no analytics, no ads, no login, no signup, no email, no password, no bullshit.</p>
+            <p>just a simple memo pad works locally on your browser.</p>
+        </div>
+    </div>
+    
     <div class="container">
         <header>
             <div class="logo">
                 <div class="logo-icon">📝</div>
                 <h1>Localpad</h1>
-            </div>
-            <div class="subtitles">
-                <p class="subtitle">no server, no database, no tracking, no analytics, no ads,</p>
-                <p class="subtitle">no login, no signup, no email, no password, no bullshit.</p>
-                <p class="subtitle">just a simple memo pad works locally on your browser.</p>
             </div>
         </header>
         
@@ -889,6 +980,11 @@
             </div>
         </section>
     </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        made by <a href="https://x.com/eshaydoteth" target="_blank">@eshaydoteth</a> with <span class="heart">♥</span>
+    </footer>
     
     <!-- Toast Notification -->
     <div class="toast" id="toast">
@@ -949,24 +1045,18 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(memos));
         }
         
-        function formatDate(timestamp) {
+        function formatTimestamp(timestamp) {
             const date = new Date(timestamp);
-            const now = new Date();
-            const diff = now - date;
+            const pad = (n) => String(n).padStart(2, '0');
             
-            // Less than 1 minute
-            if (diff < 60000) return 'Just now';
-            // Less than 1 hour
-            if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
-            // Less than 24 hours
-            if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
-            // Less than 7 days
-            if (diff < 604800000) return Math.floor(diff / 86400000) + 'd ago';
+            const year = date.getFullYear();
+            const month = pad(date.getMonth() + 1);
+            const day = pad(date.getDate());
+            const hours = pad(date.getHours());
+            const minutes = pad(date.getMinutes());
+            const seconds = pad(date.getSeconds());
             
-            return date.toLocaleDateString('ja-JP', { 
-                month: 'short', 
-                day: 'numeric'
-            });
+            return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
         }
         
         function escapeHtml(text) {
@@ -980,6 +1070,11 @@
             document.getElementById('toast-message').textContent = message;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        
+        // ===== INFO POPUP =====
+        function closeInfoPopup() {
+            document.getElementById('info-popup').classList.add('hidden');
         }
         
         function clearInputs() {
@@ -1153,16 +1248,18 @@
                 <article class="memo-card" style="animation-delay: ${index * 0.05}s">
                     <div class="memo-header">
                         <h3 class="memo-title">${escapeHtml(memo.title)}</h3>
-                        <span class="memo-date">${formatDate(memo.createdAt)}</span>
                     </div>
                     <p class="memo-content">${escapeHtml(memo.content)}</p>
                     <div class="memo-actions">
-                        <button class="btn-icon btn-edit" onclick="editMemo(${memo.id})" title="Edit">
-                            ✏️
-                        </button>
-                        <button class="btn-icon" onclick="requestDeleteMemo(${memo.id})" title="Delete">
-                            🗑
-                        </button>
+                        <div class="memo-actions-left">
+                            <button class="btn-icon btn-edit" onclick="editMemo(${memo.id})" title="Edit">
+                                ✏️
+                            </button>
+                            <button class="btn-icon" onclick="requestDeleteMemo(${memo.id})" title="Delete">
+                                🗑
+                            </button>
+                        </div>
+                        <span class="memo-timestamp">${formatTimestamp(memo.createdAt)}</span>
                     </div>
                 </article>
             `).join('');
