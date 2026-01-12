@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Localpad v1</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&family=Outfit:wght@200;300;400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap');
         
         :root {
             --bg-base: #0a0a0f;
@@ -101,54 +101,55 @@
             100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
         }
         
+        /* Golden Ratio Scale: 8, 13, 21, 34, 55, 89, 144 */
         .container {
             position: relative;
             z-index: 10;
-            max-width: 880px;
+            max-width: 834px; /* 514px × φ ≈ 832 */
             margin: 0 auto;
-            padding: 60px 24px 80px;
+            padding: 89px 34px 89px;
         }
         
         /* Header */
         header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 55px;
             animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(-21px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .logo {
             display: inline-flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
+            gap: 13px;
+            margin-bottom: 34px;
         }
         
         .logo-icon {
-            width: 48px;
-            height: 48px;
+            width: 55px;
+            height: 55px;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 14px;
+            border-radius: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+            font-size: 1.618rem;
+            box-shadow: 0 8px 34px rgba(124, 58, 237, 0.3);
             animation: pulse 3s ease-in-out infinite;
         }
         
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3); }
-            50% { box-shadow: 0 8px 48px rgba(124, 58, 237, 0.5); }
+            0%, 100% { box-shadow: 0 8px 34px rgba(124, 58, 237, 0.3); }
+            50% { box-shadow: 0 13px 55px rgba(124, 58, 237, 0.5); }
         }
         
         h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.618rem;
             font-weight: 600;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
@@ -157,22 +158,31 @@
             background-clip: text;
         }
         
+        .subtitles {
+            margin-top: 21px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
         .subtitle {
+            font-family: 'Fira Code', monospace;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
+            font-size: 0.809rem; /* 13px / 16px */
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-transform: lowercase;
+            line-height: 1.618;
         }
         
         /* Glass Card */
         .glass-card {
             background: var(--glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(21px);
+            -webkit-backdrop-filter: blur(21px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 32px;
+            border-radius: 21px;
+            padding: 34px;
             box-shadow: var(--shadow-glow);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -184,7 +194,7 @@
         
         /* Input Section */
         .input-section {
-            margin-bottom: 48px;
+            margin-bottom: 55px;
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
         }
         
@@ -254,8 +264,15 @@
         /* Button */
         .btn-container {
             display: flex;
-            gap: 12px;
-            margin-top: 20px;
+            justify-content: space-between;
+            align-items: center;
+            gap: 13px;
+            margin-top: 21px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 13px;
         }
         
         .btn {
@@ -566,11 +583,29 @@
         /* Responsive */
         @media (max-width: 640px) {
             .container {
-                padding: 40px 16px 60px;
+                padding: 55px 21px 55px;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.618rem;
+            }
+            
+            .logo {
+                margin-bottom: 21px;
+            }
+            
+            .logo-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 1.3rem;
+            }
+            
+            .subtitles {
+                margin-top: 13px;
+            }
+            
+            .subtitle {
+                font-size: 0.75rem;
             }
             
             .input-row {
@@ -578,8 +613,8 @@
             }
             
             .glass-card {
-                padding: 24px;
-                border-radius: 20px;
+                padding: 21px;
+                border-radius: 13px;
             }
             
             .memos-grid {
@@ -600,7 +635,12 @@
             }
             
             .btn-container {
+                justify-content: flex-end;
+            }
+            
+            .btn-group {
                 flex-direction: column;
+                width: 100%;
             }
             
             .btn {
@@ -641,9 +681,11 @@
                 <div class="logo-icon">📝</div>
                 <h1>Localpad</h1>
             </div>
-            <p class="subtitle">No server, no database, no tracking, no analytics, no ads</p>
-            <p class="subtitle">No login, no signup, no email, no password</p>
-            <p class="subtitle">Just a simple memo pad works locally on your browser</p>
+            <div class="subtitles">
+                <p class="subtitle">no server, no database, no tracking, no analytics, no ads,</p>
+                <p class="subtitle">no login, no signup, no email, no password, no bullshit.</p>
+                <p class="subtitle">just a simple memo pad works locally on your browser.</p>
+            </div>
         </header>
         
         <section class="glass-card input-section">
@@ -652,15 +694,17 @@
                 <textarea id="memo-input" placeholder="First line becomes the title..."></textarea>
             </div>
             <div class="btn-container">
-                <button class="btn btn-primary" onclick="saveMemo()">
-                    Save Memo
-                </button>
-                <button class="btn btn-ghost" onclick="clearInputs()">
-                    Clear
-                </button>
                 <span class="shortcut-hint" id="shortcut-hint">
                     <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save
                 </span>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="saveMemo()">
+                        Save Memo
+                    </button>
+                    <button class="btn btn-ghost" onclick="clearInputs()">
+                        Clear
+                    </button>
+                </div>
             </div>
         </section>
         
