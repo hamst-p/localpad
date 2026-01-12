@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Localpad v1.21</title>
+    <title>Localpad v.1.3.01</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&family=Outfit:wght@200;300;400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap');
         
@@ -948,19 +948,19 @@
                 <button class="btn-cancel-edit" onclick="cancelEdit()">Cancel</button>
             </div>
             <div class="input-group">
-                <label for="memo-input">Memo</label>
-                <textarea id="memo-input" placeholder="First line becomes the title..."></textarea>
+                <label for="memo-input">memo</label>
+                <textarea id="memo-input" placeholder="first line becomes the title..."></textarea>
             </div>
             <div class="btn-container">
                 <span class="shortcut-hint" id="shortcut-hint">
-                    <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to save
+                    <kbd>ctrl</kbd> + <kbd>enter</kbd> to save
                 </span>
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="saveMemo()">
-                        Save Memo
+                        save memo
                     </button>
                     <button class="btn btn-ghost" onclick="clearInputs()">
-                        Clear
+                        clear
                     </button>
                 </div>
             </div>
@@ -968,7 +968,7 @@
         
         <section class="memos-section">
             <div class="section-header">
-                <h2 class="section-title">Your Memos</h2>
+                <h2 class="section-title">saved Memos</h2>
                 <span class="memo-count" id="memo-count">0 memos</span>
             </div>
             <div class="memos-grid" id="memos-list">
@@ -1295,7 +1295,7 @@
         // Update shortcut hint for Mac
         if (navigator.platform.includes('Mac')) {
             document.getElementById('shortcut-hint').innerHTML = 
-                '<kbd>⌘</kbd> + <kbd>Enter</kbd> to save';
+                '<kbd>⌘</kbd> + <kbd>enter</kbd> to save';
         }
         
         // Initial render
